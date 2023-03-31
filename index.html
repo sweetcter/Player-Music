@@ -320,9 +320,11 @@
         },
         loadCurrentSong: function () {
           let currentSong = this.defineProperties();
-          heading.textContent = this.currentSong.name;
-          cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
-          audio.src = this.currentSong.path;
+          console.log(currentSong);
+          console.log(currentSong.name);
+          heading.textContent = currentSong.name;
+          cdThumb.style.backgroundImage = `url('${currentSong.image}')`;
+          audio.src = currentSong.path;
         },
         loadConfig: function () {
           this.isRandom = this.config.isRandom;
