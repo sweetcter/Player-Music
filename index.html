@@ -333,14 +333,14 @@
           audio.src = this.currentSong.path;
         },
         loadConfig: function () {
-          this.isRandom = this.config.isRandom;
-          this.isRebeat = this.config.isRebeat;
+          this.isRandom = this.config.isRandom || this.isRandom;
+          this.isRebeat = this.config.isRebeat || this.isRebeat;
           console.log(this.config.currentIndex);
           this.currentIndex =
             this.config.currentIndex === undefined
               ? this.currentIndex
               : this.config.currentIndex;
-          this.volume = this.config.volume;
+          this.volume = this.config.volume || this.volume;
         },
         nextSong: function () {
           this.currentIndex++;
@@ -384,7 +384,6 @@
           this.handleEvents();
 
           // Tải thông tin bài hát đầu tiên vao UI khi mới chạy ứng dụng
-          debugger;
           this.loadCurrentSong();
           // render playList
           this.render();
