@@ -187,12 +187,10 @@ header h2 {
   font-size: 18px;
 }
 .range{
-  float: right;
-  width: 0;
-  height:0;
-  background-color: #ccc;
-  margin-right: 2rem;
-  transform: rotate(-90deg);
+  /* background-color: #ccc; */
+  text-align: center;
+  /* line-height: 16px; */
+  padding: 8px 0 8px 0;
 }
 #volume{
   -webkit-appearance: none;

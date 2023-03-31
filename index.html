@@ -37,11 +37,6 @@
             "
           ></div>
         </div>
-        <!-- volume -->
-        <div class="range range-volume">
-          <input type="range" name="" id="volume" value="0" min="0" max="1" step="0.1">
-        </div>
-       
         <!-- Control -->
         <div class="control">
           <div class="btn btn-repeat">
@@ -73,6 +68,18 @@
         />
 
         <audio id="audio" src=""></audio>
+        <!-- volume -->
+        <div class="range range-volume">
+          <input
+            type="range"
+            name=""
+            id="volume"
+            value="0"
+            min="0"
+            max="1"
+            step="0.1"
+          />
+        </div>
       </div>
 
       <!-- Playlist -->
@@ -95,14 +102,14 @@
       const randomBtn = $(".btn-random");
       const rebeatBtn = $(".btn-repeat");
       const playlist = $(".playlist");
-      const volume = $('#volume');
+      const volume = $("#volume");
       const app = {
         currentIndex: 0,
-        volume:1,
+        volume: 1.0,
         isplaying: false,
         isRandom: false,
         isRebeat: false,
-        isSeeking:false,
+        isSeeking: false,
         numRandomSongsPlayed: 0,
         config: JSON.parse(localStorage.getItem(PLAYER_STORGATE_KEY)) || {},
         setConfig: function (key, value) {
@@ -177,11 +184,12 @@
           playlist.innerHTML = htmls.join("");
         },
         defineProperties: function () {
-           Object.defineProperty(this, "currentSong", {
+          Object.defineProperty(this, "currentSong", {
             get: function () {
               return this.songs[this.currentIndex];
             },
           });
+          console.log(this.songs[0]);
         },
         handleEvents: function () {
           const _This = this;
@@ -249,7 +257,7 @@
             }
             audio.play();
             _This.render();
-            _This.setConfig('currentIndex',_This.currentIndex);
+            _This.setConfig("currentIndex", _This.currentIndex);
             // console.log(_This.currentSong);
             // _This.scollToActiveSong();
           };
@@ -262,7 +270,7 @@
             }
             audio.play();
             _This.render();
-            _This.setConfig('currentIndex',_This.currentIndex);
+            _This.setConfig("currentIndex", _This.currentIndex);
             // _This.scollToActiveSong();
           };
           // Bật / tắt random song
@@ -304,11 +312,11 @@
             }
           };
           // Xử lý âm thanh
-          volume.oninput = function(e){
+          volume.oninput = function (e) {
             const soundVolume = e.target.value;
             audio.volume = soundVolume;
-            _This.setConfig('volume',e.target.value);
-          }
+            _This.setConfig("volume", e.target.value);
+          };
         },
         scollToActiveSong: function () {
           setTimeout(() => {
@@ -319,6 +327,7 @@
           });
         },
         loadCurrentSong: function () {
+          console.log(this.currentSong);
           heading.textContent = this.currentSong.name;
           cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
           audio.src = this.currentSong.path;
@@ -326,7 +335,11 @@
         loadConfig: function () {
           this.isRandom = this.config.isRandom;
           this.isRebeat = this.config.isRebeat;
-          this.currentIndex = this.config.currentIndex;
+          console.log(this.config.currentIndex);
+          this.currentIndex =
+            this.config.currentIndex === undefined
+              ? this.currentIndex
+              : this.config.currentIndex;
           this.volume = this.config.volume;
         },
         nextSong: function () {
@@ -362,6 +375,7 @@
           this.loadCurrentSong();
         },
         start: function () {
+          debugger;
           // Gán cấu hình từ config vào ứng dụng
           this.loadConfig();
           // Định nghĩa các thuộc tính cho object
@@ -370,12 +384,12 @@
           this.handleEvents();
 
           // Tải thông tin bài hát đầu tiên vao UI khi mới chạy ứng dụng
+          debugger;
           this.loadCurrentSong();
           // render playList
           this.render();
-
           // Hiển thị random va rebeat khi f5 lại trang web
-          
+
           randomBtn.classList.toggle("active", this.isRandom);
           rebeatBtn.classList.toggle("active", this.isRebeat);
           // Hiện thi volume
