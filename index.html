@@ -179,8 +179,7 @@
         defineProperties: function () {
           Object.defineProperty(this, "currentSong", {
             get: function () {
-              let curSong = this.songs[this.currentIndex];
-              return curSong;
+              return this.songs[this.currentIndex];
             },
           });
         },
