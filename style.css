@@ -130,7 +130,7 @@ header h2 {
 
 /* PLAYLIST */
 .playlist {
-  margin-top: 408px;
+  margin-top: 424px;
   padding: 12px;
 }
 
@@ -190,7 +190,7 @@ header h2 {
   /* background-color: #ccc; */
   text-align: center;
   /* line-height: 16px; */
-  padding: 8px 0 8px 0;
+  padding: 8px 0 0 0;
 }
 #volume{
   -webkit-appearance: none;
